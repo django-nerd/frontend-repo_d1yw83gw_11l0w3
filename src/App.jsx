@@ -1,71 +1,88 @@
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import { Section } from './components/Section'
+import Projects from './components/Projects'
+import Footer from './components/Footer'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
-
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgba(59,130,246,0.08),transparent_70%)]" />
+      <Navbar />
+      <main>
+        <Hero />
+        <Section
+          id="about"
+          eyebrow="About"
+          title="A bit about me"
+          description="I love building fast, accessible, and fun digital experiences. My work blends performance, animation, and clean code."
+        >
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <p className="text-slate-300">
+                Over the past few years, I’ve designed and built interfaces, APIs, and systems for products across startups and agencies.
+                I focus on developer experience, strong architecture, and tiny details that make software feel great.
+              </p>
             </div>
-
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
-          </div>
-
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <ul className="space-y-2 text-slate-300">
+                <li>• Frontend: React, Tailwind, Framer Motion</li>
+                <li>• Backend: FastAPI, Node, serverless</li>
+                <li>• Database: MongoDB, Postgres</li>
+                <li>• Tools: Vite, PNPM, Docker</li>
+              </ul>
             </div>
           </div>
+        </Section>
 
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
+        <Section
+          id="projects"
+          eyebrow="Selected Work"
+          title="Projects"
+          description="A few highlights from recent builds."
+        >
+          <Projects />
+        </Section>
+
+        <Section
+          id="skills"
+          eyebrow="Capabilities"
+          title="Skills"
+          description="What I use to bring ideas to life."
+        >
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { t: 'Frontend', d: 'React, Next.js, Tailwind, Animations' },
+              { t: 'Backend', d: 'FastAPI, REST, Auth, Integrations' },
+              { t: 'Data', d: 'MongoDB, SQL, Modeling, Caching' },
+              { t: 'DevOps', d: 'Vite, CI/CD, Observability' },
+              { t: 'UX', d: 'Accessibility-first, micro-interactions' },
+              { t: '3D', d: 'Spline, playful scenes, performance' },
+            ].map((s) => (
+              <div key={s.t} className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+                <h3 className="text-white font-semibold">{s.t}</h3>
+                <p className="text-slate-300 mt-2">{s.d}</p>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
+        </Section>
+
+        <Section
+          id="contact"
+          eyebrow="Contact"
+          title="Let’s work together"
+          description="Send a quick note and I’ll get back to you."
+        >
+          <form onSubmit={(e) => e.preventDefault()} className="grid md:grid-cols-2 gap-6">
+            <input placeholder="Name" className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input placeholder="Email" className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <textarea placeholder="Your message" rows={5} className="md:col-span-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button className="md:col-span-2 justify-self-start px-5 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-lg shadow-blue-500/30 transition-colors">Send Message</button>
+          </form>
+        </Section>
+
+        <Footer />
+      </main>
     </div>
   )
 }
